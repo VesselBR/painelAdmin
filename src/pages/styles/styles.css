@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg-btn:  rgb(147, 87, 202);
+    --bg-btn-hover:  rgb(144, 48, 235);
+}
+
+
+.bg-btn-default{
+    background-color: var(--bg-btn) !important;
+    color: #fff !important;
+}
+
+.bg-btn-default:hover{
+    background-color: var(--bg-btn-hover) !important;
+    color: #fff !important;
+}
+
+

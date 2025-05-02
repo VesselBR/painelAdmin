@@ -1,0 +1,5 @@
+table {
+  border-radius: 10px !important;
+  overflow: hidden !important; /* importante para que o arredondamento apareça corretamente */
+  border-bottom: 1px solid green !important;
+}

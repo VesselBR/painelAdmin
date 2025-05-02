@@ -1,0 +1,38 @@
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Roboto', 'Helvetica', sans-serif;
+ }
+
+ .bg-login {
+  /* background-image: url("/public/assets/img/watermark-blue.png");
+  background-repeat: no-repeat;
+  background-size: 40% auto ;
+  background-position: right 20px top 10px; */
+  height: 90vh; 
+  
+ }
+
+
+
+@media (max-width: 700px) {
+  .bg-login {
+    background-image: url("/public/assets/img/watermark-blue.png");
+    background-repeat: no-repeat;
+    background-size: 70% auto;
+    background-position: right 20px top 10px;
+    height: 90vh;
+  }
+}
+
+ .form {
+  width: 50px;
+ }
+
+ .form input {
+  width: 450px;
+  outline: none;
+  box-shadow: none;
+  background: none !important;
+ }
