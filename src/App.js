@@ -5,8 +5,8 @@ import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import PrivateRoute from "./routes/privateRoute";
 import Cadastro from "./pages/home/cadastro/cadastro";
-import Perfil from "./pages/home/perfil/perfil";
-import Usuarios from "./pages/home/usuario/usuario";
+ 
+ 
 import Empresas from "./pages/home/empresas/empresas";
 import AdicionarEmpresas from "./pages/home/adicionarEmpresas/adicionarEmpresas";
 import EditarEmpresas from "./pages/home/editarEmpresas/editarEmpresas";
@@ -30,8 +30,8 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/home" element={<Home />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/usuario" element={<Usuarios />} />
+ 
+ 
             <Route path="/empresas" element={<Empresas />} />
             <Route path="/adicionarEmpresas" element={<AdicionarEmpresas />} />
             <Route path="/editarEmpresas" element={<EditarEmpresas />} />
