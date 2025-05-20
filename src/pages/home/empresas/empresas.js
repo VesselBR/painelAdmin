@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { cnpj } from "cpf-cnpj-validator";
 import axios from "axios";
-import { getUsers } from "../../../services/apiTest";
+import { getUsers } from "../../../services/apiTenants";
 import * as bootstrap from "bootstrap";
 import { Spinner } from "react-bootstrap";
 
@@ -177,22 +177,21 @@ export default function Empresas() {
   const navigate = useNavigate();
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState(null);
-  const [clienteEditando, setClienteEditando] = useState(null);
-  const [formData, setFormData] = useState({ nome: "", document: "" });
-  const [colunas, setColunas] = useState([
+  const [colunas] = useState([
     { header: "ID", accessor: "id" },
     { header: "Nome", accessor: "name" },
     { header: "CNPJ", accessor: "document" },
+    { header: "Ativo", accessor: "active" },
   ]);
 
   const users = async () => {
     setLoading(true);
     try {
       const response = await getUsers();
-      console.log("empresas", response.data);
+      //console.log("empresas", response.data);
       const adapt = response.data.map((item) => ({
         id: item.id,
+        active: item.active,
         name: item.name,
         document: item.document,
         replicate_services: item.replicate_services,
@@ -221,34 +220,28 @@ export default function Empresas() {
       setLoading(false);
     } catch (erro) {
       console.log(erro, "erro ao trazer dados dos das empresas");
-      
     }
   };
 
-  // const dadosTable = () => {
-  //   const coleta = dados.map((item) => ({
-  //     id: item.id,
-  //     name: item.name,
-  //     document: item.document,
-  //   }));
-  //   setDados(coleta);
-  //   console.log(dados, "dados da tabela");
-  // };
-
   const handleExcluir = (row) => {
-    setDados((prev) => prev.filter((item) => item.id !== row.id));
+    setDados((prev) =>
+      prev.map((item) =>
+        item.id === row.id ? { ...item, disabled: true } : item
+      )
+    );
   };
 
   const handleEditar = (empresas) => {
-    navigate(`/editarEmpresas/`, { state: { empresas } });
+    navigate(`/edit`, { state: { empresas } });
   };
 
   const handleView = (empresas) => {
-    navigate("/visualizarEmpresas", { state: { empresas } });
+    navigate("/visualizar", { state: { empresas } });
   };
 
   useEffect(() => {
     users();
+    
   }, []);
 
   return (
@@ -270,7 +263,7 @@ export default function Empresas() {
         <div>
           <h1 className="fw-bold">Empresas</h1>
 
-          <div className="row  align-items-center  mt-3 mb-3 ms-1">
+          <div className="row  align-items-center  mt-3 mb-3 ">
             <div className="col-sm-12 col-md-4  col-lg-2 py-2">
               <button
                 className="btn  bg-primary text-light"
@@ -287,15 +280,8 @@ export default function Empresas() {
                 Voltar
               </button>
             </div>
-            {/* <button
-              className="btn btn-primary mb-3 btn-sm col-sm-5"
-              data-bs-toggle="modal"
-              data-bs-target="#modalAdicionarColuna"
-            >
-              + Adicionar Coluna
-            </button> */}
           </div>
-
+            
           <Table
             columns={colunas}
             data={dados}
