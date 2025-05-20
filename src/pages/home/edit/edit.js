@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 
-export default function EditarEmpresas() {
+export default function Editar() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -472,7 +472,7 @@ export default function EditarEmpresas() {
                     maxLength={200}
                   />
                   <Form.Text muted>
-                    {empresas.observacao?.length || 0}/200 caracteres
+                    {empresas?.observacao || 0}/200 caracteres
                   </Form.Text>
                 </Form.Group>
               </Col>
@@ -482,7 +482,7 @@ export default function EditarEmpresas() {
                   <Form.Control
                     type="date"
                     name="dataCadastro"
-                    value={empresas.dataCadastro || ""}
+                    value={empresas?.dataCadastro || ""}
                     onChange={handleChange}
                   />
                 </Form.Group>

@@ -11,13 +11,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
   const navigate = useNavigate();
-    const [age, setAge] = React.useState("");
 
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
   return (
-    <div className="100vh  text-dark text-center p-3">
+    <div className="100vh  text-dark text-start p-3">
       <h1>Home</h1>
       <div>
         <button

@@ -14,7 +14,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email === "teste@exemplo.com" && password === "123456") {
+    if (email === "teste@exemplo.com" && password === "teste123456") {
       login();
       setErrorMessage(""); // Limpa qualquer mensagem de erro anterior
       if (rememberMe) {
@@ -97,7 +97,7 @@ export default function Login() {
             </button>
             <div className="text-center py-3">
               <span>
-                <a className=" text-decoration-none" href="#">
+                <a className=" text-decoration-none" href="signUp">
                   Sing-up
                 </a>
               </span>
