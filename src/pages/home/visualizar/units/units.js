@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -57,45 +57,34 @@ export default function Units() {
 
   ]);
 
-  //carrega a tebela de unidades com base no id da empresa vindo via location (tela empresa)
-  useEffect(() => {
-    if (empresas && empresas.id) {
-      units();
-    }
-  }, [empresas]);
-
+  
   // form que monta/ atualiza as unidades
   const [form, setForm] = useState(initialState);
-
+  
   const [errors, setErrors] = useState({});
-
+  
   //pega o id vindo do location (tela empresa)
-  const units = async () => {
+  const units = useCallback( async () => {
     const tenantId = empresas.id;
     try {
       const response = await getShops(tenantId);
       const item = response.data;
-     // console.log("peter", response.data);
+      // console.log("peter", response.data);
       setDadosUnits(item);
-      // const unitsData = {
-      //   id: item.ida, // id (calculado pela api)
-      //   tenant_id: item.tenant_id, // id da empresa
-      //   name: item.name, // nome da unidade
-      //   city: item.city,
-      //   address_name: item.address_name,
-      //   address_nunmber: item.address_nunmber,
-      //   zip_code: item.zip_code,
-      //   neighborhood: item.neighborhood,
-      //   state: item.state,
-      // };
-
       //setDadosUnits(unitsData);
       console.log("testando usuarios", form);
     } catch (erro) {
       console.log(erro, "erro ao carregar units");
     }
-  };
-
+  }, [empresas , form])
+  
+  //carrega a tebela de unidades com base no id da empresa vindo via location (tela empresa)
+  useEffect(() => {
+    if (empresas && empresas.id) {
+      units();
+    }
+  }, [empresas, units]);
+  
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;

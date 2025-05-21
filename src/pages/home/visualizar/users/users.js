@@ -1,6 +1,6 @@
 //https://sistema-salao-proud-shape-889.fly.dev/api/tenants/7/users
 
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
@@ -21,14 +21,10 @@ const initialState = {
 
 export default function Users() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { usuarios = {} } = location.state || {};
+  const location = useLocation(); 
   const { empresas = {} } = location.state || {};
   const [viewUsuarios, setViewUsuarios] = useState(false);
-  const [admin, setAdmin] = useState(null);
-  const [stateAdmin, setStateAdmin] = useState("");
-
-  const [colunas, setColunas] = useState(
+  const [colunas] = useState(
     empresas?.id
       ? [
           { header: "Acesso", accessor: "role_id" },
@@ -43,12 +39,10 @@ export default function Users() {
 
   const [form, setForm] = useState(initialState);
 
-  useEffect(() => {
-    users();
-  }, []);
+
 
   //pega os usuarios
-  const users = async () => {
+  const users = useCallback( async () => {
     const tenantId = empresas.id;
     try {
       const response = await getUsuarios(tenantId);
@@ -58,7 +52,13 @@ export default function Users() {
     } catch (erro) {
       console.log("erro ao achar usuarios", erro);
     }
-  };
+  }, [empresas])
+
+  useEffect(() => {
+    if (empresas && empresas.id) {
+      users();
+    }
+  }, [empresas, users]);
 
   useEffect(() => {
     console.log(dados, "form atualizado");
