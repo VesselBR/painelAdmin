@@ -103,7 +103,7 @@ export default function Login() {
               </span>
               <br />
               <span>
-                <a className=" text-decoration-none" href="">
+                <a className=" text-decoration-none" href="#">
                   Forgot your password?
                 </a>
               </span>

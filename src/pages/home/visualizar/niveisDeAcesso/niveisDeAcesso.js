@@ -1,6 +1,6 @@
 //https://sistema-salao-proud-shape-889.fly.dev/api/tenants/7/roles
 import React, { useEffect, useState } from "react";
-import {  Form,  Button,  Container,  Row,  Col,  Card,  Accordion,} from "react-bootstrap";
+import {  Form,  Button,  Container,  Row,  Col,    Accordion,} from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import Table from "../../../../components/Table/table";
 import { getRoles, createRoles } from "../../../../services/apiTenants";
@@ -148,7 +148,7 @@ export default function NiveisDeAcesso() {
   const { empresas = {} } = location.state || {};
 
   const [acessos, setAcessos] = useState(false);
-  const [colunas, setColunas] = useState(
+  const [colunas] = useState(
     empresas?.id
       ? [
           { header: "ID", accessor: "id" },
@@ -199,10 +199,10 @@ export default function NiveisDeAcesso() {
     setForm((prev) => ({ ...prev, [name]: checked }));
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setForm((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const handleExcluir = (row) => {
     setDados((prev) => prev.filter((item) => item.id !== row.id));

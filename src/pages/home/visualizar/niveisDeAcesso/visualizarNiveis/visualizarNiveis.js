@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
   Form,
@@ -7,10 +7,10 @@ import {
   Row,
   Col,
   Card,
-  Accordion,
+  
 } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
-import Table from "../../../../../components/Table/table";
+ 
 
 const actions = ["Create", "View", "Edit", "Delete"];
 

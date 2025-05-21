@@ -1,14 +1,14 @@
 import React  from "react";
 
-import ClearIcon from "@mui/icons-material/Clear";
-import SettingsIcon from "@mui/icons-material/Settings";
+
+
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import { useState } from "react";
+
 
 export default function Table({ columns = [], data = [], onEdit, onDelete, onView }) {
-  const [disabledRows, setDisabledRows] = useState([]);
+
   if (!Array.isArray(columns) || !Array.isArray(data)) {
     return <p>Erro: Colunas ou Dados inválidos.</p>;
   }

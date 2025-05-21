@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { cnpj } from "cpf-cnpj-validator";
-import axios from "axios";
+
 import { getUsers } from "../../../services/apiTenants";
-import * as bootstrap from "bootstrap";
+
 import { Spinner } from "react-bootstrap";
 
 import Table from "../../../components/Table/table";
