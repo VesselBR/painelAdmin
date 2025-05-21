@@ -163,7 +163,7 @@ export default function NavDrawer({ children }) {
                 className="me-2"
                 sx={{ width: 40, height: 40 }}
               />
-              <span className="text-light fs-6">Peterson</span>
+              <span className="text-light fs-6">  </span>
             </div>
           )}
           {/* Botão de fechar alinhado à direita */}
