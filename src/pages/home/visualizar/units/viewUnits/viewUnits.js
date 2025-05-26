@@ -5,7 +5,7 @@ import { Container, Button , Card, Row,Col} from "react-bootstrap";
 export default function ViewUnits () {
     const navigate = useNavigate();
     const location = useLocation();
-
+    
     const {unidades = {}} = location.state
 
     return (
@@ -13,7 +13,7 @@ export default function ViewUnits () {
         <h1>Unidade:{unidades.name}</h1>
         <Button
           variant="primary"
-          onClick={() => navigate("/empresas")}
+          onClick={() => navigate(-1)}
           className="my-3"
         >
           Voltar

@@ -38,7 +38,7 @@ export default function EditUnits() {
       const tenantId = empresas.id;
       await updateShops(tenantId, units);
       toast.success("Dados atualizados com sucesso!");
-      //navigate("/empresas");
+      //navigate("/tenants");
     } catch (erro) {
       console.error("Erro ao atualizar dados: ", erro);
       toast.error("Erro ao atualizar dados");

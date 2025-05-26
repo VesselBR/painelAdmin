@@ -6,24 +6,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Table from "../../../../components/Table/table";
 import { toast } from "react-toastify";
 import { getShops, createShops } from "../../../../services/apiTenants";
+import { formUnitsInitialState } from "../../../../components/Forms/Forms";
 
-const initialState = {
-  id: "", // id (calculado pela api)
-  tenant_id: "", // id da empresa
-  name: "", // nome da unidade
-  city: "",
-  address_name: "",
-  address_nunmber: "",
-  zip_code: "",
-  neighborhood: "",
-  state: "",
-}; 
 
 export default function Units() {
   const navigate = useNavigate();
   const location = useLocation();
   const { empresas = {} } = location.state || {};
   const [unidades, setUnidades] = useState(false);
+  const [errors, setErrors] = useState({});
 
   //colunas da empresa
   const [colunas] = useState(
@@ -56,12 +47,10 @@ export default function Units() {
   const [dadosUnits, setDadosUnits] = useState([
 
   ]);
-
   
   // form que monta/ atualiza as unidades
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState(formUnitsInitialState);
   
-  const [errors, setErrors] = useState({});
   
   //pega o id vindo do location (tela empresa)
   const units = useCallback( async () => {
@@ -160,7 +149,7 @@ export default function Units() {
     try {
       await createShops(tenantId ,unitsData);
       console.log("nova unidade", unitsData);
-      setForm(initialState);
+      setForm(formUnitsInitialState);
     }catch (erro) {
       console.log("erro ao criar novo usuario", erro);
     }
@@ -171,12 +160,21 @@ export default function Units() {
     setDados((prev) => prev.filter((item) => item.id !== row.id));
   };
 
-  const handleEditar = (unidades) => {
-    navigate(`/editUnits/`, { state: { unidades } });
+  const handleEditar = (unidades, origem) => {
+    if(origem === "unidades"){
+      navigate(`/editUnits/`, { state: { unidades } });
+    } else if (origem === "empresas"){
+      navigate(`/edit`, { state: { unidades } });
+
+    }
   };
 
-  const handleView = (unidades) => {
-    navigate("/viewUnits", { state: { unidades } });
+  const handleView = (unidades, origem) => {
+    if (origem === "unidades") {
+      navigate(`/viewUnits/`, { state: { unidades } });
+    } else if (origem === "empresas") {
+      navigate(`/visualizar`, { state: { unidades } });
+    }
   };
 
   return (
@@ -184,12 +182,7 @@ export default function Units() {
       <h1>Unidades {empresas.name}</h1>
       <Col md={6}>
         <Row className="justify-content-start ">
-          <Button
-            className="col-auto m-2"
-            onClick={() =>
-              navigate(-1)
-            }
-          >
+          <Button className="col-auto m-2" onClick={() => navigate(-1)}>
             Voltar
           </Button>
           <Button className="col-auto m-2" onClick={() => setUnidades(true)}>
@@ -201,16 +194,16 @@ export default function Units() {
       <Table
         columns={colunas}
         data={dados}
-        onEdit={(item) => handleEditar(item)}
+        onEdit={(item) => handleEditar(item, "empresas")}
         onDelete={handleExcluir}
-        //onView={(item) => handleView(item)}
+        onView={(item) => handleView(item, "empresas")}
       />
       <Table
         columns={colunasUnits}
         data={dadosUnits}
-        onEdit={(item) => handleEditar(item)}
+        onEdit={(item) => handleEditar(item , "unidades")}
         onDelete={handleExcluir}
-        onView={(item) => handleView(item)}
+        onView={(item) => handleView(item, "unidades")}
       />
       {unidades ? (
         <Card className="my-3">
@@ -281,7 +274,9 @@ export default function Units() {
                       <Form.Control.Feedback type="invalid">
                         {errors.zip_code}
                       </Form.Control.Feedback>
-                      <Button className="my-1"  onClick={handleConsultarCEP}>Consultar</Button>
+                      <Button className="my-1" onClick={handleConsultarCEP}>
+                        Consultar
+                      </Button>
                     </Form.Group>
                   </Col>
                   <Col md={8}>

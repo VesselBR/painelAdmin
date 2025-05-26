@@ -6,18 +6,10 @@ import { useState } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import Table from "../../../../components/Table/table";
-
+import { formUsersInitialState } from "../../../../components/Forms/Forms";
 import { getUsuarios, createUsuarios } from "../../../../services/apiTenants";
 
-const initialState = {
-  active: "",
-  email: "",
-  first_name: "",
-  //id: "",
-  pin: "",
-  role_id: "",
-  tenant_id: "",
-};
+
 
 export default function Users() {
   const navigate = useNavigate();
@@ -37,7 +29,7 @@ export default function Users() {
   const [dados, setDados] = useState([]);
   const [errors, setErrors] = useState({});
 
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState(formUsersInitialState);
 
 
 
@@ -112,7 +104,7 @@ export default function Users() {
     } catch (erro) {
       console.log("");
     }
-    setForm(initialState);
+    setForm(formUsersInitialState);
 
     setViewUsuarios(false);
     console.log(dados, "dados att", form, "att form");

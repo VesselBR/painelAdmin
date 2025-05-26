@@ -213,7 +213,7 @@ export default function Visualizar() {
       </div>
       <Button
         variant="secondary"
-        onClick={() => navigate("/empresas")}
+        onClick={() => navigate(-1)}
         className="my-3"
       >
         Voltar

@@ -44,25 +44,28 @@ export default function Table({ columns = [], data = [], onEdit, onDelete, onVie
                     <button
                       className="btn    btn-sm    "
                       onClick={() => onEdit(row)}
+                      style={{ width: 40, height: 40, border: "none" }}
+                      disabled={row.disabled}
                     >
                       <ModeEditOutlineIcon className="text-warning" />
                     </button>
                   )}
                   {onDelete && (
                     <button
-                      className="btn  btn-sm  "
+                      className="btn  btn-sm disabled-row"
                       onClick={() => onDelete(row)}
-                      style={{ width: 40, height: 40 }}
+                      style={{ width: 40, height: 40, border: "none" }}
                       disabled={row.disabled}
                     >
-                      <DeleteForeverIcon className="text-danger" />
+                      <DeleteForeverIcon className="text-danger " />
                     </button>
                   )}
                   {onView && (
                     <button
                       className="btn btn-sm"
                       onClick={() => onView(row)}
-                      style={{ width: 40, height: 40 }}
+                      style={{ width: 40, height: 40, border: "none" }}
+                      disabled={row.disabled}
                     >
                       <VisibilityIcon className="text-primary" />
                     </button>

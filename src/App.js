@@ -8,8 +8,8 @@ import PrivateRoute from "./routes/privateRoute";
 import SignUp from "./pages/login/SignUP/signUp";
  
  
-import Empresas from "./pages/home/empresas/empresas";
-import AdicionarEmpresas from "./pages/home/adicionarEmpresas/adicionarEmpresas";
+import Tenants from "./pages/home/tenants/tenants";
+import AddTenants from "./pages/home/addTenants/addTenants";
 import Editar from "./pages/home/edit/edit";
 import Visualizar from "./pages/home/visualizar/visualizar";
 import Users from "./pages/home/visualizar/users/users";
@@ -19,7 +19,8 @@ import Units from "./pages/home/visualizar/units/units";
 import ViewUnits from "./pages/home/visualizar/units/viewUnits/viewUnits";
 import EditUnits from "./pages/home/visualizar/units/editUnits/editUnits";
 import NiveisDeAcesso from "./pages/home/visualizar/niveisDeAcesso/niveisDeAcesso";
-import VisualizarNiveis from "./pages/home/visualizar/niveisDeAcesso/visualizarNiveis/visualizarNiveis";
+import ViewNiveis from "./pages/home/visualizar/niveisDeAcesso/viewNiveis/viewNiveis";
+import EditNiveis from "./pages/home/visualizar/niveisDeAcesso/editNiveis/editNiveis";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./pages/styles/styles.css";
@@ -38,20 +39,21 @@ function App() {
 
           {/* Rotas protegidas */}
           <Route element={<PrivateRoute />}>
-            <Route path="/home" element={<Home />} />          
+            <Route path="/home" element={<Home />} />
 
-            <Route path="/empresas" element={<Empresas />} />
-            <Route path="/adicionarEmpresas" element={<AdicionarEmpresas />} />
+            <Route path="/tenants" element={<Tenants />} />
+            <Route path="/addTenants" element={<AddTenants />} />
             <Route path="/edit" element={<Editar />} />
             <Route path="/visualizar" element={<Visualizar />} />
             <Route path="/units" element={<Units />} />
             <Route path="/users" element={<Users />} />
             <Route path="/niveisDeAcesso" element={<NiveisDeAcesso />} />
-            <Route path="/visualizarNiveis" element={<VisualizarNiveis />} />
+            <Route path="/viewNiveis" element={<ViewNiveis />} />
             <Route path="/editUnits" element={<EditUnits />} />
             <Route path="/viewUnits" element={<ViewUnits />} />
             <Route path="/editUsers" element={<EditUsers />} />
             <Route path="/viewUsers" element={<ViewUsers />} />
+            <Route path="/editNiveis" element={<EditNiveis />} />
           </Route>
         </Routes>
       </AuthProvider>

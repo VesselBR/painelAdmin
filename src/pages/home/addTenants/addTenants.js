@@ -4,38 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { cnpj } from "cpf-cnpj-validator";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { formTenantsInitialState } from "../../../components/Forms/Forms";
 
-const initialState = {
-  id: "",
-  name: "",
-  document: "",
-  replicate_services: false,
-  replicate_products: false,
-  replicate_payments: false,
-  shop_dc_id: "",
-  userlimit: "",
-  module_customer: false,
-  module_admin: false,
-  module_service: false,
-  module_product: false,
-  module_stock: false,
-  module_finance: false,
-  module_fiscal: false,
-  module_cashier: false,
-  module_staff: false,
-  module_agenda: "",
-  contatoTelOne: "",
-  contatoTelTwo: "",
-  contatoCelOne: "",
-  contatoCelTwo: "",
-  email: "",
-  password: "",
-  nomeFantasia: "",
-};
-
-export default function AdicionarEmpresas() {
+export default function AddTenants() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(formTenantsInitialState);
 
   const [errors, setErrors] = useState({});
 
@@ -79,7 +52,7 @@ export default function AdicionarEmpresas() {
       await createUser(novoCliente);
       console.log("Empresa nova", novoCliente);
       toast.success("Empresa cadastrada com sucesso");
-      setFormData(initialState);
+      setFormData(formTenantsInitialState);
     } catch (error) {
       console.log("Erro ao cadastrar nova Empresa", error);
     }
@@ -141,7 +114,7 @@ export default function AdicionarEmpresas() {
       <Card>
         <Card.Body>
           <h1>Adicionar Empresas</h1>
-          <Button onClick={() => navigate("/empresas")} className="mb-3">
+          <Button onClick={() => navigate(-1)} className="mb-3">
             Voltar
           </Button>
           <Form onSubmit={handleSubmit}>
@@ -150,29 +123,32 @@ export default function AdicionarEmpresas() {
                 {renderInput("Nome da Empresa", "name", "text", true)}
               </Col>
               <Col md={6}>{renderInput("Nome Fantasia", "nomeFantasia")}</Col>
-              <Col md={6}>{renderInput("CNPJ", "document", "text", true)}</Col>
-            </Row>
+              <Col md={6} className="mt-2">{renderInput("CNPJ", "document", "text", true)}</Col>
 
-            <Row className="mt-3">
-              {[
-                "contatoTelOne",
-                "contatoTelTwo",
-                "contatoCelOne",
-                "contatoCelTwo",
-              ].map((field, i) => (
-                <Col md={2} key={i}>
-                  <Form.Control
-                    type="text"
-                    name={field}
-                    placeholder={field.replace(/([A-Z])/g, " $1")}
-                    value={formData[field]}
-                    onChange={(e) => {
-                      handlePhoneChange(e);
-                      handleChange(e);
-                    }}
-                  />
-                </Col>
-              ))}
+              <Col md={6}>
+                <Row className="mt-3">
+                  <Form.Label>Contatos</Form.Label>
+                  {[
+                    "contatoTel",
+                    "contatoTel",
+                    "contatoCel",
+                    "contatoCel",
+                  ].map((field, i) => (
+                    <Col md={3} key={i}>
+                      <Form.Control
+                        type="text"
+                        name={field}
+                        placeholder={field.replace(/([A-Z])/g, " $1")}
+                        value={formData[field]}
+                        onChange={(e) => {
+                          handlePhoneChange(e);
+                          handleChange(e);
+                        }}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
             </Row>
 
             <Row className="mt-3">
@@ -189,7 +165,7 @@ export default function AdicionarEmpresas() {
                 {renderCheckbox("Replica Produtos", "replicate_products")}
                 {renderCheckbox("Replica Pagamentos", "replicate_payments")}
               </Col>
-              <Col md={6}>
+              <Col md={2}>
                 {renderInput(
                   "Quantidade de Usuários",
                   "userlimit",
@@ -199,7 +175,7 @@ export default function AdicionarEmpresas() {
               </Col>
             </Row>
 
-                <hr/>
+            <hr />
             <Row className="mt-4 ">
               <Form.Label>Módulos:</Form.Label>
               <Col md={12}>
@@ -225,6 +201,7 @@ export default function AdicionarEmpresas() {
                 </Row>
               </Col>
             </Row>
+            <hr/>
             <Row>
               <Col md={6}>
                 <Form.Label>Observações:</Form.Label>

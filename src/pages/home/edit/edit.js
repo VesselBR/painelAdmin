@@ -13,38 +13,6 @@ export default function Editar() {
   const { empresas: empresaSelecionada = {} } = location.state || {};
   const [empresas, setEmpresas] = useState(empresaSelecionada || {});
 
-  //console.log(empresaSelecionada, "testando");
-
-  // const [formData, setFormData] = useState([
-  //   {
-  //     id: "",
-  //     name: "",
-  //     document: "",
-  //     replicate_services: "",
-  //     replicate_products: "",
-  //     replicate_payments: "",
-  //     shop_dc_id: "",
-  //     userlimit: "",
-  //     module_customer: "",
-  //     module_admin: "",
-  //     module_service: "",
-  //     module_product: "",
-  //     module_stock: "",
-  //     module_finance: "",
-  //     module_fiscal: "",
-  //     module_cashier: "",
-  //     module_staff: "",
-  //     module_agenda: "",
-  //     contatoTelOne: "",
-  //     contatoTelTwo: "",
-  //     contatoCelOne: "",
-  //     contatoCelTwo: "",
-  //     email: "",
-  //     senha: "",
-
-  //   },
-  // ]);
-
   //Formata para telefone e celular
   const handlePhoneChange = (event) => {
     let value = event.target.value.replace(/\D/g, "");
@@ -96,7 +64,7 @@ export default function Editar() {
       );
       console.log("Empresa atualizada com sucesso!", response.data);
       toast.success("Dados atualizados com sucesso!");
-      navigate("/empresas");
+      navigate("/tenants");
     } catch (erro) {
       console.log("Erro ao atualizar dados: ", erro);
       toast.error("Erro ao atualizar dados")
@@ -118,7 +86,7 @@ export default function Editar() {
       <Card>
         <Card.Body>
           <h1>Editar Empresas</h1>
-          <Button onClick={() => navigate("/empresas")} className="mb-3">
+          <Button onClick={() => navigate(-1)} className="mb-3">
             Voltar
           </Button>
           <Form onSubmit={handleSubmit}>
@@ -500,7 +468,7 @@ export default function Editar() {
             <Button
               variant="secondary"
               className="mt-4"
-              onClick={() => navigate("/empresas")}
+              onClick={() => navigate("/tenants")}
             >
               Cancelar
             </Button>

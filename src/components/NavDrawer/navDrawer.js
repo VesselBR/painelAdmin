@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -99,10 +99,15 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function NavDrawer({ children }) {
+  const location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const { empresas = {} } = location.state || {};
+
+ 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -163,7 +168,7 @@ export default function NavDrawer({ children }) {
                 className="me-2"
                 sx={{ width: 40, height: 40 }}
               />
-              <span className="text-light fs-6">  </span>
+              <span className="text-light fs-6">{empresas?.name || ""}  </span>
             </div>
           )}
           {/* Botão de fechar alinhado à direita */}
@@ -183,7 +188,7 @@ export default function NavDrawer({ children }) {
           <div>
             <button
               className="btn text-light text-start  ps-3"
-              onClick={() => navigate("/empresas")}
+              onClick={() => navigate("/tenants")}
               style={{ width: "100%" }}
             >
               <img

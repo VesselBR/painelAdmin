@@ -14,7 +14,7 @@ export default function Home() {
       <div>
         <button
           className="btn bg-dark text-light"
-          onClick={() => navigate("/empresas")}
+          onClick={() => navigate("/tenants")}
         >
           Cadastrar Empresa
         </button>

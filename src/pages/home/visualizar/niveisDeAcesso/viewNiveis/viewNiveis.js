@@ -1,16 +1,13 @@
 import React from "react";
-
 import {
   Form,
   Button,
   Container,
   Row,
   Col,
-  Card,
-  
+  Card,  
 } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
- 
 
 const actions = ["Create", "View", "Edit", "Delete"];
 
@@ -19,8 +16,7 @@ const labels = {
   Create: "Criar",
   Edit: "Editar",
   Delete: "Deletar",
-};
-  
+};  
 
 const permissoes = [
   {
@@ -88,7 +84,7 @@ const permissoes = [
   },
 ];
 
-export default function VisualizarNiveis() {
+export default function ViewNiveis() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -99,7 +95,7 @@ export default function VisualizarNiveis() {
       <h1> {niveis.name}</h1>
       <Button
         variant="primary"
-        onClick={() => navigate("/empresas")}
+        onClick={() => navigate(-1)}
         className="my-3"
       >
         Voltar

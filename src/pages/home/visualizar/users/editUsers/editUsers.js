@@ -64,7 +64,7 @@ export default function EditUser() {
 
       await updateUsuarios(tenantId, userToSend);
       toast.success("Dados atualizados com sucesso!");
-      //navigate("/empresas");
+      //navigate("/tenants");
     } catch (erro) {
       console.error("Erro ao atualizar dados: ", erro);
       toast.error("Erro ao atualizar dados");
